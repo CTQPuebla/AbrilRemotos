@@ -1,9 +1,11 @@
 package com.persistence.request;
 
+import com.persistence.entity.Venta;
+
 public class DetalleRequest {
 	
 	int dtvId;
-	int ventaId;
+	Venta venta;
 	int productoId;
 	int cantidad;
 
@@ -12,13 +14,17 @@ public DetalleRequest(int id) {
 		this.dtvId = id;
 	}
 
-public DetalleRequest(int dtvId, int ventaId, int productoId, int cantidad) {
-	
+
+
+public DetalleRequest(int dtvId, Venta venta, int productoId, int cantidad) {
+
 	this.dtvId = dtvId;
-	this.ventaId = ventaId;
+	this.venta = venta;
 	this.productoId = productoId;
 	this.cantidad = cantidad;
 }
+
+
 
 public int getDtvId() {
 	return dtvId;
@@ -28,13 +34,20 @@ public void setDtvId(int dtvId) {
 	this.dtvId = dtvId;
 }
 
-public int getVentaId() {
-	return ventaId;
+
+
+
+public Venta getVenta() {
+	return venta;
 }
 
-public void setVentaId(int ventaId) {
-	this.ventaId = ventaId;
+
+
+public void setVenta(Venta venta) {
+	this.venta = venta;
 }
+
+
 
 public int getProductoId() {
 	return productoId;

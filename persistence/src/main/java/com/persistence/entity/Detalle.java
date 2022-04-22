@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,8 +28,12 @@ public class Detalle implements Serializable{
 	@Column(name="DTV_ID", columnDefinition="NUMBER")
 	int dtvId;
 	
-	@Column(name="VENTA_ID", columnDefinition="NUMBER")
-	int ventaId;
+	@ManyToOne
+	@JoinColumn(name="VENTA_ID", updatable = false, nullable= false)
+	private Venta venta;
+	
+	//@Column(name="VENTA_ID", columnDefinition="NUMBER")
+	//int ventaId;
 	
 	@Column(name="PRODUCTO_ID", columnDefinition="NUMBER")
 	int productoId;
@@ -43,12 +49,13 @@ public class Detalle implements Serializable{
 		this.dtvId = dtvId;
 	}
 
-	public int getVentaId() {
-		return ventaId;
+
+	public Venta getVenta() {
+		return venta;
 	}
 
-	public void setVentaId(int ventaId) {
-		this.ventaId = ventaId;
+	public void setVenta(Venta venta) {
+		this.venta = venta;
 	}
 
 	public int getProductoId() {

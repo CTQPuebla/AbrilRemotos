@@ -1,13 +1,14 @@
 package com.persistence.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -39,13 +40,20 @@ public class Producto implements Serializable{
 	int precio;
 	
 	@Column(name="FECHA_CAD", columnDefinition="DATE")
-	Date fechaCad;
+	LocalDate fechaCad;
 	
 	@Column(name="MARCA", columnDefinition="NVARCHAR2(15)")
 	String marca;
 	
 	@Column(name="STATUS", columnDefinition="NUMBER")
 	int status;
+	
+	
+	//Atributo tipo inventario
+	
+	@OneToOne(mappedBy="producto")
+	Inventario inventario;
+	
 
 	public int getProductoId() {
 		return productoId;
@@ -79,11 +87,11 @@ public class Producto implements Serializable{
 		this.precio = precio;
 	}
 
-	public Date getFechaCad() {
+	public LocalDate getFechaCad() {
 		return fechaCad;
 	}
 
-	public void setFechaCad(Date fechaCad) {
+	public void setFechaCad(LocalDate fechaCad) {
 		this.fechaCad = fechaCad;
 	}
 

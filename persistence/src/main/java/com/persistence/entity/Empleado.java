@@ -1,7 +1,7 @@
 package com.persistence.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,7 @@ public class Empleado implements Serializable{
 	String estadoCivil;
 	
 	@Column(name="FECHA_NAC", columnDefinition="DATE")
-	Date fechaNac;
+	LocalDate fechaNac;
 	
 	@Column(name="CARGO_ID", columnDefinition="NUMBER")
 	int cargoId;
@@ -90,11 +90,11 @@ public class Empleado implements Serializable{
 		this.estadoCivil = estadoCivil;
 	}
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(Date fechaNac) {
+	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 

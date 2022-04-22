@@ -1,6 +1,7 @@
 package com.persistence.request;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 
 public class EmpleadoRequest {
@@ -10,7 +11,7 @@ public class EmpleadoRequest {
 	int antiguedad;
 	String sexo;
 	String estadoCivil;
-	Date fechaNac;
+	LocalDate fechaNac;
 	int cargoId;
 	int status;
 	
@@ -25,7 +26,7 @@ public class EmpleadoRequest {
 
 
 	public EmpleadoRequest(int empleadoId, String nombre, int antiguedad, String sexo, String estadoCivil,
-			Date fechaNac, int cargoId, int status) {
+			LocalDate fechaNac, int cargoId, int status) {
 		
 		this.empleadoId = empleadoId;
 		this.nombre = nombre;
@@ -121,7 +122,7 @@ public class EmpleadoRequest {
 
 
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 
@@ -129,7 +130,7 @@ public class EmpleadoRequest {
 
 
 
-	public void setFechaNac(Date fechaNac) {
+	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 

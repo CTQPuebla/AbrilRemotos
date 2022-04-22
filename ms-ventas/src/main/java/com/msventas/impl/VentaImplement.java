@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msventas.service.VentaService;
+import com.persistence.entity.Cliente;
 import com.persistence.entity.Venta;
+import com.persistence.repository.ClienteRepository;
 import com.persistence.repository.VentaRepository;
 import com.persistence.request.VentaRequest;
 
@@ -17,14 +19,21 @@ public class VentaImplement implements VentaService{
 	@Autowired
 	VentaRepository repo;
 	
+	@Autowired
+	ClienteRepository clirepo;
+	
+	
 	
 	@Override
 	public Venta guardar(VentaRequest request) {
 		
+		//Para persistir una venta, debo tener al objeto cliente(existente en la db) ya listo
+		Cliente cliente = clirepo.buscarActivo(request.getCliente().getClienteId());
+		
 		Venta v = new Venta();
 		
 		v.setVentaId(request.getVentaId());
-		v.setClienteId(request.getClienteId());
+		v.setCliente(cliente);
 		v.setFechaVenta(request.getFechaVenta());
 		
 		repo.save(v);
@@ -46,7 +55,7 @@ public class VentaImplement implements VentaService{
 		Venta v = repo.findById(request.getVentaId()).get();
 		
 		v.setVentaId(request.getVentaId());
-		v.setClienteId(request.getClienteId());
+		v.setCliente(request.getCliente());
 		v.setFechaVenta(request.getFechaVenta());
 		
 		repo.save(v);
@@ -70,4 +79,5 @@ public class VentaImplement implements VentaService{
 		return repo.findAll();
 	}
 
+	
 }

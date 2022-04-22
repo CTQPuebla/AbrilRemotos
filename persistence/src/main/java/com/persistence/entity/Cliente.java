@@ -1,19 +1,27 @@
 package com.persistence.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 //persistence
 
 @Entity
 @Table(name="CLIENTES")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
+property="@clienteId", scope=Cliente.class)
+
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,7 +47,19 @@ public class Cliente implements Serializable {
 	int status;
 
 	
+	//Atributo relacional
+	@OneToMany(mappedBy ="cliente", cascade =CascadeType.ALL)
+	private List<Venta> venta;
 	
+	
+	public List<Venta> getVenta() {
+		return venta;
+	}
+
+	public void setVenta(List<Venta> venta) {
+		this.venta = venta;
+	}
+
 	public int getClienteId() {
 		return clienteId;
 	}

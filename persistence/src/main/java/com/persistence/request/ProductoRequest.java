@@ -1,6 +1,7 @@
 package com.persistence.request;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 public class ProductoRequest {
 	
@@ -8,7 +9,7 @@ public class ProductoRequest {
 	String nombre;
 	String presentacion;
 	int precio;
-	Date fechaCad;
+	LocalDate fechaCad;
 	String marca;
 	int status;
 	
@@ -19,7 +20,7 @@ public ProductoRequest(int id) {
 	}
 
 
-public ProductoRequest(int productoId, String nombre, String presentacion, int precio, Date fechaCad, String marca,
+public ProductoRequest(int productoId, String nombre, String presentacion, int precio, LocalDate fechaCad, String marca,
 		int status) {
 	
 	this.productoId = productoId;
@@ -72,12 +73,12 @@ public void setPrecio(int precio) {
 }
 
 
-public Date getFechaCad() {
+public LocalDate getFechaCad() {
 	return fechaCad;
 }
 
 
-public void setFechaCad(Date fechaCad) {
+public void setFechaCad(LocalDate fechaCad) {
 	this.fechaCad = fechaCad;
 }
 
