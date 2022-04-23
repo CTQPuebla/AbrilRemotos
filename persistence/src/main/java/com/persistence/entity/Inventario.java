@@ -2,7 +2,6 @@ package com.persistence.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,33 +13,30 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="INVENTARIO")
-public class Inventario implements Serializable{
+@Table(name = "INVENTARIO")
+public class Inventario implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="i_id_auto")
-	@SequenceGenerator(name="i_id_auto", sequenceName="INVENTARIO_SEQ", allocationSize = 1)
-	
 
-	@Column(name="INVENTARIO_ID", columnDefinition="NUMBER")
-	int inventarioId;
+	// Atributos
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invid_auto")
+	@SequenceGenerator(name = "invid_auto", sequenceName = "INVENTARIO_SEQ", initialValue = 7, allocationSize = 1)
+
+	@Column(name = "INVENTARIO_ID", columnDefinition = "NUMBER")
+	private int inventarioId;
 	
 	@OneToOne
-	@JoinColumn(name="PRODUCTO_ID", columnDefinition="NUMBER")
-	Producto producto;
+	@JoinColumn(name = "PRODUCTO_ID", updatable=false, nullable=false)
+	private Producto producto;
 	
-	@Column(name="STOCK", columnDefinition="NUMBER")
-	int stock;
-	
-	@Column(name="FECHA_RESURTIDO", columnDefinition="DATE")
-	LocalDate fecha_res;
-	
+	@Column(name = "STOCK", columnDefinition = "NUMBER")
+	private int stock;
+	@Column(name = "FECHA_RESURTIDO", columnDefinition = "DATE")
+	private LocalDate fechaResurtido;
 
 	public int getInventarioId() {
 		return inventarioId;
@@ -66,15 +62,12 @@ public class Inventario implements Serializable{
 		this.stock = stock;
 	}
 
-	public LocalDate getFecha_res() {
-		return fecha_res;
+	public LocalDate getFechaResurtido() {
+		return fechaResurtido;
 	}
 
-	public void setFecha_res(LocalDate fecha_res) {
-		this.fecha_res = fecha_res;
+	public void setFechaResurtido(LocalDate fechaResurtido) {
+		this.fechaResurtido = fechaResurtido;
 	}
-	
-	
-	
-	
+
 }

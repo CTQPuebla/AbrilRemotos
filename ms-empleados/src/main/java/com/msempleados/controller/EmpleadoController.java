@@ -19,52 +19,38 @@ import com.persistence.request.EmpleadoRequest;
 @RestController
 @RequestMapping("api/empleados")
 public class EmpleadoController {
-	
+
 	@Autowired
 	EmpleadoService srv;
-	
-	
-	//http://localhost:8090/api/empleados/mostrar-todos/
+
+	// http://localhost:8085/api/empleados/mostrar-todos/
 	@GetMapping("mostrar-todos")
-	public List<Empleado> listar(){
-		
+	public List<Empleado> listar() {
 		return srv.mostrarTodos();
 	}
-	
-	
-	
-	//http://localhost:8090/api/empleados/buscar-por-id/?
-	@GetMapping("buscar-por-id/{id}")
-	public Empleado buscar(@PathVariable int id){
-		
-		return srv.buscar(id);
-	}
-	
-	
-	
-	//http://localhost:8090/api/empleados/guardar/
+
+	// http://localhost:8085/api/empleados/guardar/
 	@PostMapping("guardar")
 	public Empleado guardar(@RequestBody EmpleadoRequest e) {
-		
 		return srv.guardar(e);
 	}
-	
-	
-	
-	//http://localhost:8090/api/empleados/actualizar/
+
+	// http://localhost:8085/api/empleados/actualizar/
 	@PutMapping("actualizar")
 	public Empleado actualizar(@RequestBody EmpleadoRequest e) {
-		
 		return srv.actualizar(e);
 	}
-	
-	
-	//http://localhost:8090/api/empleados/eliminar/?
+
+	// http://localhost:8085/api/empleados/buscar-por-id/
+	@GetMapping("buscar-por-id/{id}")
+	public Empleado buscar(@PathVariable int id) {
+		return srv.buscar(id);
+	}
+
+	// http://localhost:8085/api/empleados/eliminar/?
 	@DeleteMapping("eliminar/{id}")
-	public String eliminar(@PathVariable int id){
-		
+	public String eliminar(@PathVariable int id) {
 		return srv.eliminar(id);
 	}
-	
 
 }

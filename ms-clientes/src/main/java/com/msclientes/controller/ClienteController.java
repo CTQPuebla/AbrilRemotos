@@ -19,50 +19,37 @@ import com.persistence.request.ClienteRequest;
 @RestController
 @RequestMapping("api/clientes")
 public class ClienteController {
-	
+
 	@Autowired
 	ClienteService srv;
-	
-	
-	//http://localhost:8090/api/clientes/mostrar-todos/
+
+	// http://localhost:8085/api/clientes/mostrar-todos/
 	@GetMapping("mostrar-todos")
-	public List<Cliente> listar(){
-		
+	public List<Cliente> listar() {
 		return srv.mostrarTodos();
 	}
-	
-	
-	//http://localhost:8090/api/clientes/buscar-por-id/?
-	@GetMapping("buscar-por-id/{id}")
-	public Cliente buscar(@PathVariable int id){
-		
-		return srv.buscar(id);
-	}
-	
-	
-	
-	//http://localhost:8090/api/clientes/guardar/
+
+	// http://localhost:8085/api/clientes/guardar/
 	@PostMapping("guardar")
 	public Cliente guardar(@RequestBody ClienteRequest c) {
-		
 		return srv.guardar(c);
 	}
-		
-	
-	//http://localhost:8090/api/clientes/actualizar/
+
+	// http://localhost:8085/api/clientes/actualizar/
 	@PutMapping("actualizar")
 	public Cliente actualizar(@RequestBody ClienteRequest c) {
-		
 		return srv.actualizar(c);
 	}
 
-	
-	//http://localhost:8090/api/clientes/eliminar/?
-	@DeleteMapping("eliminar/{id}")
-	public String eliminar(@PathVariable int id){
-		
-		return srv.eliminar(id);
+	// http://localhost:8085/api/clientes/buscar-por-id/
+	@GetMapping("buscar-por-id/{id}")
+	public Cliente buscar(@PathVariable int id) {
+		return srv.buscar(id);
 	}
-	
-	
+
+	// http://localhost:8085/api/clientes/eliminar/?
+	@DeleteMapping("eliminar/{id}")
+	public String eliminar(@PathVariable int id) {
+		return srv.eliminar(id);
+	}	
 }

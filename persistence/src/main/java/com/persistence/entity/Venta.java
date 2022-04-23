@@ -16,35 +16,37 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//persistence
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="VENTAS")
-public class Venta implements Serializable{
-	
+@Table(name = "VENTAS")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@ventaId", scope = Venta.class)
+public class Venta implements Serializable {
+
+	// ManyToOne
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="v_id_auto")
-	@SequenceGenerator(name="v_id_auto", sequenceName="VENTA_SEQ", allocationSize = 1, initialValue=1)
-	
-	
-	@Column(name="VENTA_ID", columnDefinition="NUMBER")
-	int ventaId;
-	
-	
-	//@Column(name="CLIENTE_ID", columnDefinition="NUMBER")
-	//int clienteId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vid_auto")
+	@SequenceGenerator(name = "vid_auto", sequenceName = "VENTAS_SEQ", allocationSize = 1)
+	@Column(name = "VENTA_ID", columnDefinition = "NUMBER")
+	private int ventaId;
+
 	@ManyToOne
-	@JoinColumn(name="CLIENTE_ID", updatable = false, nullable= false)
+	@JoinColumn(name = "CLIENTE_ID", updatable = false, nullable = false)
 	private Cliente cliente;
+
+	@Column(name = "FECHA_VENTA", columnDefinition = "DATE")
+	private LocalDate fechaVenta;
 	
-	@Column(name="FECHA_VENTA", columnDefinition="DATE")
-	LocalDate fechaVenta;
-	
-	//Atributo relacional
-	@OneToMany(mappedBy ="venta", cascade =CascadeType.ALL)
-	private List<Detalle> detalle;
+	// Atributo relacional
+		@OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+		private List<DetalleVenta> detalleventa;
 
 	public int getVentaId() {
 		return ventaId;
@@ -69,10 +71,13 @@ public class Venta implements Serializable{
 	public void setFechaVenta(LocalDate fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
-	
 
-	
-	
-	
+	public List<DetalleVenta> getDetalleventa() {
+		return detalleventa;
+	}
+
+	public void setDetalleventa(List<DetalleVenta> detalleventa) {
+		this.detalleventa = detalleventa;
+	}
 
 }

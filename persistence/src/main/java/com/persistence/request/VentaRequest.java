@@ -5,18 +5,15 @@ import java.time.LocalDate;
 import com.persistence.entity.Cliente;
 
 public class VentaRequest {
-
-	int ventaId;
-	Cliente cliente;
-	LocalDate fechaVenta;
-
-	public VentaRequest(int id) {
-
-		this.ventaId = id;
-	}
-
+	
+	// Atributos
+	private int ventaId;
+	private Cliente cliente;
+	private LocalDate fechaVenta;
+	
+	public VentaRequest(int id) {}
+	
 	public VentaRequest(int ventaId, Cliente cliente, LocalDate fechaVenta) {
-
 		this.ventaId = ventaId;
 		this.cliente = cliente;
 		this.fechaVenta = fechaVenta;
@@ -45,5 +42,5 @@ public class VentaRequest {
 	public void setFechaVenta(LocalDate fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
-
+	
 }

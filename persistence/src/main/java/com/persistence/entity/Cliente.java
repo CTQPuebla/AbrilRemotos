@@ -15,50 +15,32 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-//persistence
-
 @Entity
-@Table(name="CLIENTES")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
-property="@clienteId", scope=Cliente.class)
-
+@Table(name = "CLIENTES")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@clienteId", scope = Cliente.class)
 public class Cliente implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="c_id_auto")
-	@SequenceGenerator(name="c_id_auto", sequenceName="CLIENTE_SEQ", allocationSize = 1)
-	
-	
-	@Column(name="CLIENTE_ID", columnDefinition="NUMBER")
-	int clienteId;
-	
-	@Column(name="NOMBRE", columnDefinition="NVARCHAR2(15)")
-	String nombre;
-	
-	@Column(name="TELEFONO", columnDefinition="NVARCHAR2(10)")
-	String telefono;
-	
-	@Column(name="CORREO", columnDefinition="NVARCHAR2(15)")
-	String correo;
-	
-	@Column(name="STATUS", columnDefinition="NUMBER")
-	int status;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cid_auto")
+	@SequenceGenerator(name = "cid_auto", sequenceName = "CLIENTES_SEQ", allocationSize = 1)
+	@Column(name = "CLIENTE_ID", columnDefinition = "NUMBER")
+	private int clienteId;
+	@Column(name = "NOMBRE", columnDefinition = "NVARCHAR2(15)")
+	private String nombre;
+	@Column(name = "TELEFONO", columnDefinition = "NVARCHAR2(10)")
+	private String telefono;
+	@Column(name = "CORREO", columnDefinition = "NVARCHAR2(15)")
+	private String correo;
+	@Column(name = "status", columnDefinition = "NUMBER")
+	private int status;
 
-	
-	//Atributo relacional
-	@OneToMany(mappedBy ="cliente", cascade =CascadeType.ALL)
+	// Atributo relacional
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Venta> venta;
-	
-	
-	public List<Venta> getVenta() {
-		return venta;
-	}
-
-	public void setVenta(List<Venta> venta) {
-		this.venta = venta;
-	}
 
 	public int getClienteId() {
 		return clienteId;
@@ -100,12 +82,12 @@ public class Cliente implements Serializable {
 		this.status = status;
 	}
 
-	
-	
-	
-	
-	
-	
-	
+	public List<Venta> getVenta() {
+		return venta;
+	}
+
+	public void setVenta(List<Venta> venta) {
+		this.venta = venta;
+	}
 
 }

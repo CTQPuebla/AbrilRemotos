@@ -11,19 +11,18 @@ import com.persistence.repository.EmpleadoRepository;
 import com.persistence.request.EmpleadoRequest;
 
 @Service
-public class EmpleadoImplement implements EmpleadoService{
+public class EmpleadoImplement implements EmpleadoService {
 
-	//Inyeccion de dependencias - exponer la funcionalidad de una clase/interface en otra
+	// inyeccion de dependencias - exponer la funcionalidad de una clase/interface
+	// en otra
 	@Autowired
 	EmpleadoRepository repo;
-	
-	
-	//No me llames, yo te busco despues(principio hollywood)
-	
-	
+
+	// principio hollywood: no me llames yo te busco despues
+
 	@Override
 	public Empleado guardar(EmpleadoRequest request) {
-		
+
 		Empleado e = new Empleado();
 		
 		e.setNombre(request.getNombre());
@@ -32,48 +31,51 @@ public class EmpleadoImplement implements EmpleadoService{
 		e.setEstadoCivil(request.getEstadoCivil());
 		e.setFechaNac(request.getFechaNac());
 		e.setCargoId(request.getCargoId());
-		
-		//Operacion que no necesita un valor del request
+		// operacion que no necesita un valor del request
 		e.setStatus(1);
-		
-		
 		repo.save(e);
-		
 		return e;
 	}
 
+//	@Override
+//	public Empleado buscar(int id) {
+//		// Esto devuelve un Optional (clase envoltorio)
+//		// Es necesario sacar el objeto del envoltorio con el metodo .get()
+//
+//		return repo.findById(id).get();
+//	}
+	
 	@Override
 	public Empleado buscar(int id) {
-		//Esto devuelve un Optional (Clase envoltorio)
-		//Es necesario sacar el objeto del envoltorio con el metodo .get()
+		// Esto devuelve un Optional (clase envoltorio)
+		// Es necesario sacar el objeto del envoltorio con el metodo .get()
+
 		return repo.buscarActivo(id);
 	}
-
+	
 	@Override
 	public Empleado actualizar(EmpleadoRequest request) {
-		
-		//Primero busco aquello que quiero actualizar
+		// primero busco lo que quiero actualizar
 		Empleado e = repo.buscarActivo(request.getEmpleadoId());
-		
+		//Empleado e = repo.findById(request.getEmpleadoId()).get();
+
 		e.setNombre(request.getNombre());
 		e.setAntiguedad(request.getAntiguedad());
 		e.setSexo(request.getSexo());
 		e.setEstadoCivil(request.getEstadoCivil());
 		e.setFechaNac(request.getFechaNac());
 		e.setCargoId(request.getCargoId());
-		
-		
 		repo.save(e);
-		
+
 		return e;
 	}
 
 	@Override
 	public String eliminar(int id) {
-		
-		//Puedo llamar al metodo findById si necesito hacer una eliminacion fisica
-		//repo.deleteById(id);
-		
+		// Esto devuelve un Optional (Clase envoltorio)
+		//
+
+		// Borrado logico
 		Empleado e = repo.findById(id).get();
 		e.setStatus(0);
 		repo.save(e);
@@ -82,10 +84,7 @@ public class EmpleadoImplement implements EmpleadoService{
 
 	@Override
 	public List<Empleado> mostrarTodos() {
-		
-		return repo.mostrarActivos();
+		// TODO Auto-generated method stub
+		return repo.findAll();
 	}
-	
-	
-
 }

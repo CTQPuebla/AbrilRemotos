@@ -16,55 +16,41 @@ import com.msinventarios.service.InventarioService;
 import com.persistence.entity.Inventario;
 import com.persistence.request.InventarioRequest;
 
-
 @RestController
 @RequestMapping("api/inventarios")
 public class InventarioController {
-	
+
 	@Autowired
 	InventarioService srv;
-	
-	//http://localhost:8090/api/inventarios/mostrar-todos/
+
+	// http://localhost:8085/api/inventarios/mostrar-todos/
 	@GetMapping("mostrar-todos")
-	public List<Inventario> listar(){
-		
+	public List<Inventario> listar() {
 		return srv.mostrarTodos();
 	}
-	
-	
-	//http://localhost:8090/api/inventarios/buscar-por-id/?
+
+	// http://localhost:8085/api/inventarios/guardar/
+	@PostMapping("guardar")
+	public Inventario guardar(@RequestBody InventarioRequest i) {
+		return srv.guardar(i);
+	}
+
+	// http://localhost:8085/api/inventarios/actualizar/
+	@PutMapping("actualizar")
+	public Inventario actualizar(@RequestBody InventarioRequest i) {
+		return srv.actualizar(i);
+	}
+
+	// http://localhost:8085/api/inventarios/buscar-por-id/
 	@GetMapping("buscar-por-id/{id}")
-	public Inventario buscar(@PathVariable int id){
-		
+	public Inventario buscar(@PathVariable int id) {
 		return srv.buscar(id);
 	}
 
-	
-	
-	//http://localhost:8090/api/inventarios/guardar/
-	@PostMapping("guardar")
-	public Inventario guardar(@RequestBody InventarioRequest i) {
-		
-		return srv.guardar(i);
-	}
-	
-	
-	
-	//http://localhost:8090/api/inventarios/actualizar/
-	@PutMapping("actualizar")
-	public Inventario actualizar(@RequestBody InventarioRequest i) {
-		
-		return srv.actualizar(i);
-	}
-	
-	
-	
-	//http://localhost:8090/api/inventarios/eliminar/?
+	// http://localhost:8085/api/inventarios/eliminar/?
 	@DeleteMapping("eliminar/{id}")
-	public String eliminar(@PathVariable int id){
-		
+	public String eliminar(@PathVariable int id) {
 		return srv.eliminar(id);
 	}
-	
 	
 }
